@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, useMediaQuery, Rating, styled } from '@mui/material';
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from '@mui/icons-material';
 import { Link, useParams } from 'react-router-dom';
@@ -83,10 +83,20 @@ const GridButtonsContainer = styled(Grid)(({ theme }) => ({
   },
 }));
 
+const Video = styled('iframe')(({ theme }) => ({
+  width: '50%',
+  height: '50%',
+  [theme.breakpoints.down('sm')]: {
+    width: '90%',
+    height: '90%',
+  },
+}));
+
 function MovieInformation() {
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
   const { data: recommendations, isFetching: isrecommendationsFetching } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
 
@@ -182,7 +192,7 @@ function MovieInformation() {
               <ButtonGroup size="small" variant="outlined">
                 <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>Website</Button>
                 <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>IMDB</Button>
-                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>Trailer</Button>
+                <Button onClick={() => setOpen(true)} href="#" endIcon={<Theaters />}>Trailer</Button>
               </ButtonGroup>
             </GridButtonsContainer>
             <GridButtonsContainer item xs={12} sm={6}>
@@ -209,6 +219,22 @@ function MovieInformation() {
         </Typography>
         {recommendations ? <MovieList movies={recommendations} numberOfMovies={12} /> : <Box>Sorry, nothing was found.</Box>}
       </Box>
+      <Modal
+        closeAfterTransition
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {data?.videos?.results?.length > 0 && (
+          <Video
+            autoPlay
+            frameBorder="0"
+            title="Trailer"
+            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+            allow="autoplay"
+          />
+        )}
+      </Modal>
     </GridContainerSpaceRound>
   );
 }
