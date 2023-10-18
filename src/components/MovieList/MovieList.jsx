@@ -12,10 +12,10 @@ const MoviesContainer = styled(Grid)(({ theme }) => ({
   },
 }));
 
-function MovieList({ movies }) {
+function MovieList({ movies, numberOfMovies }) {
   return (
     <MoviesContainer container>
-      {movies.results.map((movie, i) => (
+      {movies.results.slice(0, numberOfMovies).map((movie, i) => (
         <Movie key={i} movie={movie} i={i} />
       ))}
     </MoviesContainer>

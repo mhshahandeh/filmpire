@@ -4,8 +4,9 @@ import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBord
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { useGetMovieQuery } from '../../services/TMDB';
+import { useGetMovieQuery, useGetRecommendationsQuery } from '../../services/TMDB';
 import genreIcons from '../../assets/genres';
+import { MovieList } from '..';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 const GridContainerSpaceRound = styled(Grid)(({ theme }) => ({
@@ -64,7 +65,7 @@ const CastImage = styled('img')(({
   borderRadius: '10px',
 }));
 
-const ButtonsContainer = styled(Box)(({ theme }) => ({
+const ButtonsContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-around',
   width: '100%',
@@ -74,13 +75,21 @@ const ButtonsContainer = styled(Box)(({ theme }) => ({
 }));
 
 const GridButtonsContainer = styled(Grid)(({ theme }) => ({
-
+  display: 'flex',
+  justifyContent: 'space-around',
+  width: '100%',
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+  },
 }));
 
 function MovieInformation() {
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
   const dispatch = useDispatch();
+
+  const { data: recommendations, isFetching: isrecommendationsFetching } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
+
   const isMovieFavorited = false;
   const isMovieWatchlisted = false;
 
@@ -91,6 +100,7 @@ function MovieInformation() {
   const addToWatchlist = () => {
 
   };
+  console.log(recommendations);
 
   if (isFetching) {
     return (
@@ -169,14 +179,14 @@ function MovieInformation() {
         <Grid item container sx={{ marginTop: '10px' }}>
           <ButtonsContainer>
             <GridButtonsContainer item xs={12} sm={6}>
-              <ButtonGroup size="medium" variant="outlined">
+              <ButtonGroup size="small" variant="outlined">
                 <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>Website</Button>
                 <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>IMDB</Button>
                 <Button onClick={() => {}} href="#" endIcon={<Theaters />}>Trailer</Button>
               </ButtonGroup>
             </GridButtonsContainer>
             <GridButtonsContainer item xs={12} sm={6}>
-              <ButtonGroup size="medium" variant="outlined">
+              <ButtonGroup size="small" variant="outlined">
                 <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
                   {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
                 </Button>
@@ -193,6 +203,12 @@ function MovieInformation() {
           </ButtonsContainer>
         </Grid>
       </Grid>
+      <Box marginTop="5rem" width="100%">
+        <Typography variant="h3" gutterBottom align="center">
+          You might also like
+        </Typography>
+        {recommendations ? <MovieList movies={recommendations} numberOfMovies={12} /> : <Box>Sorry, nothing was found.</Box>}
+      </Box>
     </GridContainerSpaceRound>
   );
 }
