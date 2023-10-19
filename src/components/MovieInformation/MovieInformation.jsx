@@ -29,7 +29,6 @@ const Poster = styled('img')(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     width: '100%',
-    height: '350px',
     margin: '0 auto',
     marginBottom: '30px',
   },
