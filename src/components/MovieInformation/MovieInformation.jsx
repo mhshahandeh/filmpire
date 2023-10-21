@@ -109,7 +109,6 @@ function MovieInformation() {
   const addToWatchlist = () => {
 
   };
-  console.log(recommendations);
 
   if (isFetching) {
     return (
@@ -126,10 +125,10 @@ function MovieInformation() {
       </Box>
     );
   }
-
+  console.log(recommendations);
   return (
     <GridContainerSpaceRound container>
-      <Grid item sm={12} lg={4} align="center">
+      <Grid item sm={12} lg={4} align="center" marginBottom="20px">
         <Poster
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
           alt={data?.title}
@@ -150,7 +149,7 @@ function MovieInformation() {
             </Typography>
           </Box>
           <Typography variant="h6" align="center" gutterBottom>
-            {data?.runtime}min {data?.spoken_languages.length > 0 ? `/ ${data?.spoken_languages[0].name}` : ''}
+            {data?.runtime}min | Language: {data?.spoken_languages[0].name}
           </Typography>
         </GridContainerSpaceRound>
         <GenresContainer item>
@@ -216,7 +215,7 @@ function MovieInformation() {
         <Typography variant="h3" gutterBottom align="center">
           You might also like
         </Typography>
-        {recommendations ? <MovieList movies={recommendations} numberOfMovies={12} /> : <Box>Sorry, nothing was found.</Box>}
+        {recommendations?.results.length ? <MovieList movies={recommendations} numberOfMovies={12} /> : <Box>Sorry, nothing was found.</Box>}
       </Box>
       <Modal
         closeAfterTransition

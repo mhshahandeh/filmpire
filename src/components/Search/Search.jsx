@@ -26,12 +26,15 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 function Search() {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       dispatch(searchMovie(query));
     }
   };
+
+  if (location.pathname !== '/') return null;
 
   return (
     <SearchContainer>

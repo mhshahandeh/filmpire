@@ -11,6 +11,7 @@ const Container = styled('div')({
 const Main = styled('main')({
   flexGrow: '1',
   padding: '2em',
+  width: '100%',
 });
 
 const Toolbar = styled('div')({
@@ -26,6 +27,7 @@ function App() {
         <Toolbar />
         <Routes>
           <Route path="/" element={<Movies />} />
+          <Route exact path="/approved" element={<Movies />} />
           <Route path="/movie/:id" element={<MovieInformation />} />
           <Route path="/actors/:id" element={<Actors />} />
           <Route path="/profile/:id" element={<Profile />} />
