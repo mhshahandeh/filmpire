@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { CssBaseline, styled } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 import { Actors, MovieInformation, Movies, NavBar, Profile } from './index';
+import useAlan from './Alan';
 
 const Container = styled('div')({
   display: 'flex',
@@ -19,6 +20,10 @@ const Toolbar = styled('div')({
 });
 
 function App() {
+  const alanBtnContainer = useRef();
+
+  useAlan();
+
   return (
     <Container>
       <CssBaseline />
@@ -33,6 +38,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </Main>
+      <div ref={alanBtnContainer} />
     </Container>
   );
 }
