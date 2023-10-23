@@ -114,7 +114,11 @@ function NavBar() {
                 onClick={() => {}}
               >
                 {!isMobile && <>My Movies &nbsp;</>}
-                <Avatar sx={{ width: '30px', height: '30px' }} alt="profile" />
+                <Avatar
+                  sx={{ width: '30px', height: '30px' }}
+                  alt="profile"
+                  src={`https://www.tmdb.org/t/p/w64_and_h64_face${user?.avatar?.tmdb?.avatar_path}`}
+                />
               </LinkButton>
             )}
           </Box>
