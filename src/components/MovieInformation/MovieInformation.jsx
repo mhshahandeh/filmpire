@@ -166,7 +166,7 @@ function MovieInformation() {
           {data?.tagline}
         </Typography>
         <GridContainerSpaceRound item>
-          <Box display="flex" align="center">
+          <Box display="flex" align="center" justifyContent="center">
             <Rating readOnly value={data.vote_average / 2} />
             <Typography variant="subtitle1" gutterBottom sx={{ marginLeft: '10px' }}>
               {data?.vote_average}

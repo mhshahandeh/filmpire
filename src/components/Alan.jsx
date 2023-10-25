@@ -16,7 +16,7 @@ function useAlan() {
       key: 'c8d1ed43feed381ebae8c1dea0aa33902e956eca572e1d8b807a3e2338fdd0dc/stage',
       onCommand: ({ command, mode, genres, genreOrCategory, query }) => {
         if (command === 'chooseGenre') {
-          const foundGenres = genres.find((g) => g.name.toLowerCase() === g.toLowerCase());
+          const foundGenres = genres.find((g) => g.name.toLowerCase() === genreOrCategory.toLowerCase());
 
           if (foundGenres) {
             navigate('/');
