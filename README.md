@@ -1,7 +1,8 @@
 # Filmpire [(Live Demo)](https://filmpire1.netlify.app/)
 
 **فیلم پایر** وبسایت فیلم یابی با قابلیت مشاهده جزيات فیلم، اطلاعات بازیگران، تریلر فیلم و قابلیت اضافه کردن فیلم ها به favorite , watchlist. همچنین در این وبسایت از هوش مصنوعی alan ai استفاده شده که میتوانید با فرمان های زیر از قابلیت های آن استفاده ببرید. (هم وطن عزیز بدلیل فیلتر بودن سایت api بکارگرفته شده با vpn وارد شوید) 
-**فرمان های هوش مصنوعی**
+
+**فرمان های هوش مصنوعی**:
 1. Make it dark, Make it light. (تغییر تم وبسایت)
 2. Log inو Log out. (ورود/خروج به/از وبسایت)
 3. Go to [نام ژانر مورد نظر]
@@ -12,7 +13,7 @@
 
 
 ## Screenshots
-
+![Filmpire website screenshot](/public/website-screenshot.png)
 
 ## Technologies Used
 
