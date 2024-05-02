@@ -13,7 +13,8 @@
 
 
 ## Screenshots
-![Filmpire website screenshot](/public/website-screenshot.png)
+![Snapgram website screenshot](https://github.com/mhshahandeh/screenshots/blob/main/Screenshot_snapgram_sign-in.jpg?raw=true)
+![Snapgram website screenshot](https://github.com/mhshahandeh/screenshots/blob/main/Screenshot_snapgram.jpg?raw=true)
 
 ## Technologies Used
 
